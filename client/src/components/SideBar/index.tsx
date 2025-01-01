@@ -1,6 +1,7 @@
 "use client";
 import { useAppDispatch, useAppSelector } from "@/app/redux";
 import { setIsSideBarCollapsed } from "@/state";
+import { useGetProjectsQuery } from "@/state/api";
 import {
   AlertCircle,
   AlertOctagon,
@@ -27,12 +28,15 @@ import React, { useState } from "react";
 const SideBar = () => {
   const [showProjects, setShowProjects] = useState(false);
   const [showPriority, setShowPriority] = useState(false);
+  const { data: projects } = useGetProjectsQuery();
   const dispatch = useAppDispatch();
   const isSideBarCollapsed = useAppSelector(
     (state) => state.global.isSidebarCollapsed,
   );
 
-  const sideBarClassName = `fixed flex flex-col h-[100%] justify-between shadow-xl transition-all duration-300 z-40 dark:bg-black overflow-y-auto bg-white ${isSideBarCollapsed ? "w-0 hidden" : "w-64"}`;
+  const sideBarClassName = `fixed flex flex-col h-[100%] justify-between shadow-xl transition-all duration-300 z-40 dark:bg-black overflow-y-auto bg-white ${
+    isSideBarCollapsed ? "w-0 hidden" : "w-64"
+  } scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-green-400 scrollbar-track-green-200 dark:scrollbar-thumb-green-500 dark:scrollbar-track-green-400`;
 
   return (
     <div className={sideBarClassName}>
@@ -95,6 +99,16 @@ const SideBar = () => {
           )}
         </button>
         {/* PROJECT LISTS */}
+
+        {showProjects &&
+          projects?.map((project) => (
+            <SideBarLink
+              key={project.id}
+              icon={Briefcase}
+              label={project.name}
+              href={`/projects/${project.id}`}
+            />
+          ))}
 
         {/* PRIORITIES */}
         <button
