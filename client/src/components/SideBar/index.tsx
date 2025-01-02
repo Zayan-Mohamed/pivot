@@ -60,7 +60,7 @@ const SideBar = () => {
         {/* TEAM */}
         <div className="flex items-center gap-5 border-y-[1.5px] border-gray-200 px-8 py-4 dark:border-gray-700">
           <Image
-            src="/logo_P.png"
+            src="https://ad-s3-images.s3.ap-southeast-2.amazonaws.com/logo_P.png"
             alt="__TEAM_LOGO__"
             width={40}
             height={40}
