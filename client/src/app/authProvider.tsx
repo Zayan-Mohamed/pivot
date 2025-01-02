@@ -42,22 +42,24 @@ const formFields = {
   },
 };
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
 const AuthProvider = ({ children }: any) => {
-  return (
-    <div>
-      <Authenticator formFields={formFields}>
-        {({ user }: any) =>
-          user ? (
-            <div>{children}</div>
-          ) : (
-            <div>
-              <h1>Please sign in below:</h1>
-            </div>
-          )
-        }
-      </Authenticator>
-    </div>
-  );
+    return (
+        <div>
+            <Authenticator formFields={formFields}>
+                {({ user }: any) =>
+                    user ? (
+                        <div>{children}</div>
+                    ) : (
+                        <div>
+                            <h1>Please sign in below:</h1>
+                        </div>
+                    )
+                }
+            </Authenticator>
+        </div>
+    );
 };
+/* eslint-enable @typescript-eslint/no-explicit-any */
 
 export default AuthProvider;
