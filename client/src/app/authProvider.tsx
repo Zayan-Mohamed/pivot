@@ -42,27 +42,19 @@ const formFields = {
   },
 };
 
-type AuthProviderProps = {
-    children: ReactNode;
-  };
-
-const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
+const AuthProvider = ({ children }: any) => {
   return (
     <div>
       <Authenticator formFields={formFields}>
-        {({ user, signOut }) => (
+        {({ user }: any) =>
           user ? (
-            <div>
-              <h1>Welcome, {user.username}!</h1>
-              <button onClick={signOut}>Sign Out</button>
-              {children}
-            </div>
+            <div>{children}</div>
           ) : (
             <div>
               <h1>Please sign in below:</h1>
             </div>
           )
-        )}
+        }
       </Authenticator>
     </div>
   );
