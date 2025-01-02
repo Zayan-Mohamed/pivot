@@ -4,22 +4,24 @@ import { useGetTasksQuery } from "@/state/api";
 import React from "react";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { dataGridClassNames, dataGridSxStyles } from "@/lib/utils";
+import { GridRenderCellParams } from "@mui/x-data-grid";
 
 type Props = {
   id: string;
   setIsModalNewTaskOpen: (isOpen: boolean) => void;
 };
 
-const renderStatus = (params) => (
+
+const renderStatus = (params: GridRenderCellParams) => (
   <span className="inline-flex rounded-full bg-green-100 px-2 text-xs font-semibold leading-5 text-green-800">
-    {params.value}
+    {params.value as string}
   </span>
 );
 
-const renderUsername = (params: { value: { username?: string } }) =>
-  params.value?.username || "Unknown";
-const renderAssignee = (params: { value: { username?: string } }) =>
-  params.value?.username || "Unassigned";
+const renderUsername = (params: GridRenderCellParams) =>
+  (params.value as { username?: string })?.username || "Unknown";
+const renderAssignee = (params: GridRenderCellParams) =>
+  (params.value as { username?: string })?.username || "Unassigned";
 
 const columns: GridColDef[] = [
   { field: "title", headerName: "Title", width: 100 },
